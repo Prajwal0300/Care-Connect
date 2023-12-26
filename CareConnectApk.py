@@ -11,15 +11,15 @@ from streamlit_option_menu import option_menu
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/diabetes_model.sav', 'rb'))
+diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
 
-heart_disease_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('heart_disease_model.sav','rb'))
 
-parkinsons_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/parkinsons_model.sav', 'rb'))
+parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
 
-sarcoidosis_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/sarcoidosis_model.sav', 'rb'))
+sarcoidosis_model = pickle.load(open('sarcoidosis_model.sav', 'rb'))
 
-kidney_model =  pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/kidney_model.sav', 'rb'))
+kidney_model =  pickle.load(open('kidney_model.sav', 'rb'))
 
 # sidebar for navigation
 with st.sidebar:

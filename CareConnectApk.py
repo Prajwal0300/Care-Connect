@@ -11,15 +11,15 @@ from streamlit_option_menu import option_menu
 
 # loading the saved models
 
-diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
+diabetes_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/diabetes_model.sav', 'rb'))
 
-heart_disease_model = pickle.load(open('heart_disease_model.sav','rb'))
+heart_disease_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/heart_disease_model.sav','rb'))
 
-parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
+parkinsons_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/parkinsons_model.sav', 'rb'))
 
-sarcoidosis_model = pickle.load(open('sarcoidosis_model.sav', 'rb'))
+sarcoidosis_model = pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/sarcoidosis_model.sav', 'rb'))
 
-
+kidney_model =  pickle.load(open('C:/Users/prajw/OneDrive/Desktop/CareConnect/Saved Models/kidney_model.sav', 'rb'))
 
 # sidebar for navigation
 with st.sidebar:
@@ -27,11 +27,12 @@ with st.sidebar:
     selected = option_menu('CARE CONNECT',
 
                           ['Home Page',
+                           'CKD Prediction',
                            'Diabetes Prediction',
                            'Heart Disease Prediction',
                            'Parkinsons Prediction',
                            'Sarcoidosis Prediction'],
-                          icons=['house','activity','heart','person','star'],
+                          icons=['house','person','activity','heart','person','star'],
                           default_index=0)
 
 # Home Page
@@ -69,6 +70,112 @@ if selected == 'Home Page':
     st.table(df)
 
     st.write('Add more information...')
+
+
+
+
+
+# CKD Prediction Page
+if (selected == 'CKD Prediction'):
+
+    # page title
+    st.title('CKD Prediction using ML')
+
+
+    # getting the input data from the user
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        age = st.text_input('Enter the Age')
+
+    with col2:
+        bp = st.text_input('Blood Pressure')
+
+    with col3:
+        sg = st.text_input('Specific Gravity')
+
+    with col4:
+        al = st.text_input('Albumin')
+
+    with col1:
+        su = st.text_input('Sugar')
+
+    with col2:
+        rbc = st.text_input('Red Blood Cells')
+
+    with col3:
+        pc = st.text_input('Pus Cell')
+
+    with col4:
+        pcc = st.text_input('Pus Cell Clumps')
+
+    with col1:
+        ba = st.text_input('Bacteria')
+
+    with col2:
+        bgr = st.text_input('Blood Glucose Random')
+
+    with col3:
+        bu = st.text_input('Blood Urea')
+
+    with col4:
+        sc = st.text_input('Serum Creatinine')
+
+    with col1:
+        sod = st.text_input('Sodium')
+
+    with col2:
+        pot = st.text_input('Potassium')
+
+    with col3:
+        hemo = st.text_input('Hemoglobin')
+
+    with col4:
+        pcv = st.text_input('Packed Cell Volume')
+
+    with col1:
+        wc = st.text_input('White Blood Cell Count')
+
+    with col2:
+        rc = st.text_input('Red Blood Cell Count')
+
+    with col3:
+        htn = st.text_input('Hypertension')
+
+    with col4:
+        dm = st.text_input('Diabetes Mellitus')
+
+    with col1:
+        cad = st.text_input('Coronary Artery Disease')
+
+    with col2:
+        appet = st.text_input('Appetite')
+
+    with col3:
+        pe = st.text_input('Pedal Edema')
+
+    with col4:
+        ane = st.text_input('Anemia')
+
+
+    # code for Prediction
+    ckd_diagnosis = ''
+
+    # creating a button for Prediction
+
+    if st.button('CKD Test Result'):
+        ckd_prediction = kidney_model.predict([[age, bp, sg, al, su, rbc, pc, pcc, ba, bgr, bu, sc, sod, pot, hemo, pcv, wc, rc, htn, dm, cad, appet, pe, ane]])
+
+        if (ckd_prediction[0] == 0):
+          ckd_diagnosis = 'The person has CKD'
+        else:
+          ckd_diagnosis = 'The person dose not have CKD'
+
+    st.success(ckd_diagnosis)
+
+
+
+
 
 
 
@@ -284,71 +391,6 @@ if (selected == "Parkinsons Prediction"):
           parkinsons_diagnosis = "The person does not have Parkinson's disease"
 
     st.success(parkinsons_diagnosis)
-
-    # Sarcoidosis Prediction Page
-    if (selected == 'Sarcoidosis Prediction'):
-
-        # page title
-        st.title('Sarcoidosis Prediction using ML')
-
-        # getting the input data from the user
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            Sex = st.text_input('Sex (0=male 1=female)')
-
-        with col2:
-            Histology = st.text_input('Histology ( 0=negative, 1=positive) ')
-
-        with col3:
-            Xthorax = st.text_input('X-thorax (Scaddinger scale)')
-
-        with col1:
-            CT = st.text_input('CT ( 0=negative, 1=positive)')
-
-        with col2:
-            SPECT = st.text_input('SPECT (0=negative, 1=positive)')
-
-        with col3:
-            SRS = st.text_input('SRS (0=negative, 1=positive)')
-
-        with col1:
-            PET = st.text_input('PET (0=negative, 1=positive)')
-
-        with col2:
-            lunginvolvement = st.text_input('lunginvolvement (1=yes, 0=no)')
-
-        with col3:
-            eyeinvolvement = st.text_input('eyeinvolvement (1=yes, 0=no)')
-
-        with col1:
-            neurological = st.text_input('neurological involvement (1=yes, 0=no)')
-
-        with col2:
-            skininvovlement = st.text_input('skin invovlement (1=yes, 0=no) ')
-
-        with col3:
-            SIL = st.text_input('SIL 2R (in pg/mL)')
-
-        with col1:
-            ACE = st.text_input('ACE (in U/ml)')
-
-        # code for Prediction
-        sarco_diagnosis = ''
-
-        # creating a button for Prediction
-
-        if st.button('Sarcoidosis Test Result'):
-            sarco_prediction = sarcoidosis_model.predict(
-                [[Sex, Histology, Xthorax, CT, SPECT, SRS, PET, lunginvolvement, eyeinvolvement, neurological,
-                  skininvovlement, SIL, ACE]])
-
-            if (sarco_prediction[0] == 1):
-                sarco_diagnosis = 'The person is diabetic'
-            else:
-                sarco_diagnosis = 'The person is not diabetic'
-
-        st.success(sarco_diagnosis)
 
 
 
